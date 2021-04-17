@@ -18,7 +18,8 @@ class AdminController extends AbstractController
         $countContactRequest = count($allContactRequest);
 
         return $this->render('admin/index.html.twig', [
-            'controller_name' => 'AdminController',
+            'allContactRequest' => $allContactRequest,
+            'countContactRequest' => $countContactRequest
         ]);
     }
 }

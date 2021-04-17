@@ -6,10 +6,11 @@ namespace App\Entity;
 use App\Repository\ContactRequestRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 
 /**
- * @ORM\Entity(repositoryClass=RequestRepository::class)
+ * @ORM\Entity(repositoryClass=ContactRequestRepository::class)
  */
 class ContactRequest
 {
@@ -29,6 +30,7 @@ class ContactRequest
      *     minMessage="Votre nom doit contenir au moins deux lettres",
      *     maxMessage="Votre nom ne peut pas contenir plus de {{ limit }} lettres"
      * )
+     * @Groups({"list_contact"})
      */
     private string $name;
 
@@ -36,6 +38,7 @@ class ContactRequest
      * @ORM\Column(type="string", length=100)
      * @Assert\NotBlank(message="Veuillez renseigner votre email")
      * @Assert\Email(message="Veuillez renseigner un email valide")
+     * @Groups({"list_contact"})
      */
     private string $email;
 
@@ -46,13 +49,14 @@ class ContactRequest
      *     min= 20,
      *     minMessage="Veuillez être plus explicite concernant votre question"
      * )
+     * @Groups({"list_contact"})
      */
     private string $content;
 
     /**
      * @ORM\Column(type="boolean")
      */
-    private $isRequestFinished = false;
+    private bool $isRequestFinished = false;
 
     public function getId(): ?int
     {
