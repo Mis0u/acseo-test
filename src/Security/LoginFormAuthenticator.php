@@ -26,12 +26,17 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator implements P
 
     public const LOGIN_ROUTE = 'app_login';
 
-    private $entityManager;
-    private $urlGenerator;
-    private $csrfTokenManager;
-    private $passwordEncoder;
+    private EntityManagerInterface $entityManager;
+    private UrlGeneratorInterface $urlGenerator;
+    private CsrfTokenManagerInterface $csrfTokenManager;
+    private UserPasswordEncoderInterface $passwordEncoder;
 
-    public function __construct(EntityManagerInterface $entityManager, UrlGeneratorInterface $urlGenerator, CsrfTokenManagerInterface $csrfTokenManager, UserPasswordEncoderInterface $passwordEncoder)
+    public function __construct(
+        EntityManagerInterface $entityManager,
+        UrlGeneratorInterface $urlGenerator,
+        CsrfTokenManagerInterface $csrfTokenManager,
+        UserPasswordEncoderInterface $passwordEncoder
+    )
     {
         $this->entityManager = $entityManager;
         $this->urlGenerator = $urlGenerator;
@@ -71,7 +76,7 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator implements P
 
         if (!$user) {
             // fail authentication with a custom error
-            throw new CustomUserMessageAuthenticationException('Email could not be found.');
+            throw new CustomUserMessageAuthenticationException('Cet email est inconnu');
         }
 
         return $user;
@@ -79,6 +84,9 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator implements P
 
     public function checkCredentials($credentials, UserInterface $user)
     {
+        if (!$this->passwordEncoder->isPasswordValid($user, $credentials['password'])) {
+            throw new CustomUserMessageAuthenticationException('Mot de passe incorrect');
+        }
         return $this->passwordEncoder->isPasswordValid($user, $credentials['password']);
     }
 
@@ -96,8 +104,7 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator implements P
             return new RedirectResponse($targetPath);
         }
 
-        // For example : return new RedirectResponse($this->urlGenerator->generate('some_route'));
-        throw new \Exception('TODO: provide a valid redirect inside '.__FILE__);
+        return new RedirectResponse($this->urlGenerator->generate('app_admin'));
     }
 
     protected function getLoginUrl()

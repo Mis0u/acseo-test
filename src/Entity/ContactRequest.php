@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace App\Entity;
 
-use App\Repository\RequestRepository;
+use App\Repository\ContactRequestRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -25,9 +25,9 @@ class ContactRequest
      * @Assert\NotBlank(message="Veuillez renseigner votre nom")
      * @Assert\Length(
      *     min=2,
-     *     max=20,
+     *     max=15,
      *     minMessage="Votre nom doit contenir au moins deux lettres",
-     *     maxMessage="Votre nom ne peut pas contenir plus de 20 lettres"
+     *     maxMessage="Votre nom ne peut pas contenir plus de {{ limit }} lettres"
      * )
      */
     private string $name;
