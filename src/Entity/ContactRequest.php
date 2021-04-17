@@ -5,6 +5,8 @@ namespace App\Entity;
 
 use App\Repository\RequestRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+
 
 /**
  * @ORM\Entity(repositoryClass=RequestRepository::class)
@@ -20,23 +22,37 @@ class ContactRequest
 
     /**
      * @ORM\Column(type="string", length=50)
+     * @Assert\NotBlank(message="Veuillez renseigner votre nom")
+     * @Assert\Length(
+     *     min=2,
+     *     max=20,
+     *     minMessage="Votre nom doit contenir au moins deux lettres",
+     *     maxMessage="Votre nom ne peut pas contenir plus de 20 lettres"
+     * )
      */
     private string $name;
 
     /**
      * @ORM\Column(type="string", length=100)
+     * @Assert\NotBlank(message="Veuillez renseigner votre email")
+     * @Assert\Email(message="Veuillez renseigner un email valide")
      */
     private string $email;
 
     /**
      * @ORM\Column(type="text")
+     * @Assert\NotBlank(message="Veuillez nous indiquer votre question")
+     * @Assert\Length(
+     *     min= 20,
+     *     minMessage="Veuillez être plus explicite concernant votre question"
+     * )
      */
     private string $content;
 
     /**
      * @ORM\Column(type="boolean")
      */
-    private $isRequestFinished;
+    private $isRequestFinished = false;
 
     public function getId(): ?int
     {
