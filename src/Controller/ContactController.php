@@ -12,8 +12,6 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\KernelInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Serializer\SerializerInterface;
-use Symfony\Component\Filesystem\Filesystem;
-use Symfony\Component\Uid\UuidV4;
 
 class ContactController extends AbstractController
 {
