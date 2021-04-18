@@ -19,22 +19,16 @@ class ContactRequestRepository extends ServiceEntityRepository
         parent::__construct($registry, ContactRequest::class);
     }
 
-    // /**
-    //  * @return Request[] Returns an array of Request objects
-    //  */
-    /*
-    public function findByExampleField($value)
+
+    public function findByEmail()
     {
         return $this->createQueryBuilder('r')
-            ->andWhere('r.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('r.id', 'ASC')
-            ->setMaxResults(10)
+            ->select('r.email')
             ->getQuery()
             ->getResult()
         ;
     }
-    */
+
 
     /*
     public function findOneBySomeField($value): ?Request

@@ -14,12 +14,12 @@ class AdminController extends AbstractController
      */
     public function index(ContactRequestRepository $repo): Response
     {
-        $allContactRequest = $repo->findAll();
-        $countContactRequest = count($allContactRequest);
+        $allEmail = $repo->findByEmail();
+        $column = array_column($allEmail, 'email');
+        $numberOfEmails = array_count_values($column);
 
         return $this->render('admin/index.html.twig', [
-            'allContactRequest' => $allContactRequest,
-            'countContactRequest' => $countContactRequest
+            'requests' => $numberOfEmails,
         ]);
     }
 }
