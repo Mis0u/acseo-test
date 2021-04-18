@@ -2,15 +2,18 @@
 
 namespace App\Controller;
 
+use App\Controller\Helper\JsonFile;
 use App\Entity\ContactRequest;
 use App\Form\ContactFormType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\KernelInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Component\Filesystem\Filesystem;
+use Symfony\Component\Uid\UuidV4;
 
 class ContactController extends AbstractController
 {
@@ -20,7 +23,9 @@ class ContactController extends AbstractController
     public function index(
         Request $request,
         EntityManagerInterface $manager,
-        SerializerInterface $serializer
+        SerializerInterface $serializer,
+        KernelInterface $kernel,
+        JsonFile $jsonFile
     ): Response
     {
         $contactRequest = new ContactRequest();
@@ -30,10 +35,10 @@ class ContactController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()){
             $manager->persist($contactRequest);
             $manager->flush();
+
             $this->addFlash('success', 'Votre question a bien été envoyée');
-            //$projectDir = $kernel->getProjectDir();
-            $filesystem = new Filesystem();
-            $jsonContent = $serializer->serialize($contactRequest, 'json', ['groups' => 'list_contact']);
+
+            $jsonFile->create($kernel,$serializer,$contactRequest);
 
             return $this->redirectToRoute('app_contact');
         }
