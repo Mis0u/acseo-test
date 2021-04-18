@@ -1,3 +1,68 @@
+@import "~bootstrap";
+@import "~@fortawesome/fontawesome-free/css/all.min.css";
+
 body {
-    background-color: lightgray;
+    background-color: #0089BA;
+    height: 100vh;
+}
+
+main {
+    padding: 30px;
+}
+
+div.alert-success {
+    width: 100%;
+    text-align: center;
+}
+
+h1, a, a:hover ,p, th, td {
+    color: #CCF6FF;
+}
+
+th, td {
+    text-align: center;
+}
+
+a:hover {
+    text-decoration: none;
+}
+
+a.see {
+    opacity: 1;
+    transition: 0.3s ease-in-out;
+}
+
+a.see:hover {
+    opacity: 0;
+}
+
+a.see i {
+    opacity: 0;
+    transition: 0.3s ease-in-out;
+}
+
+a.see:hover i {
+    opacity: 0;
+}
+
+form {
+    background: #0089BA;
+    box-shadow:  20px 20px 60px #00749e,
+    -20px -20px 60px #009ed6;
+    padding: 50px;
+    border-radius: 50px;
+    text-align: center;
+    width: 40%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+}
+
+h1 {
+    text-align: center;
+}
+
+span.form-error-message {
+    color: #F9F871;
 }

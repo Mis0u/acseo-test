@@ -1,12 +1,12 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello AdminController!{% endblock %}
+{% block title %}Back Office{% endblock %}
 
 {% block body %}
-<h1>Back office</h1>
+<h1 class="mb-5">Back office</h1>
 
     {% if requests|length > 0%}
-        <table class="table">
+        <table class="table table-bordered table-hover">
             <thead>
             <tr>
                 <th scope="col">Email</th>
@@ -19,7 +19,7 @@
                 <tr>
                     <td>{{ key }}</td>
                     <td>{{ value }}</td>
-                    <td><a href="{{ path('app_admin_contact', {'slug': key|slug}) }}">Voir</a></td>
+                    <td><a href="{{ path('app_admin_contact', {'slug': key|slug}) }}" class="see">Voir</a></td>
                 </tr>
             {% endfor %}
             </tbody>

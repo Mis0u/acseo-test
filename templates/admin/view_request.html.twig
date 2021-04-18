@@ -21,9 +21,9 @@
                 <td>
                     <a href="{{ path('app_admin_request', {'id': request.id}) }}">
                         {% if request.isRequestFinished %}
-                            Retraiter cette demande
-                            {% else %}
-                                Indiquer que cette demande est traité
+                            <i class="far fa-check-square"></i>
+                        {% else %}
+                            <i><i class="far fa-square"></i></i>
                         {% endif %}
                     </a>
                 </td>

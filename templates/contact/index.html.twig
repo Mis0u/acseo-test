@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello ContactController!{% endblock %}
+{% block title %}Contact{% endblock %}
 
 {% block body %}
     {% for message in app.flashes('success') %}
@@ -8,9 +8,9 @@
             {{ message }}
         </div>
     {% endfor %}
-<h1>Faites nous part de votre question</h1>
     {{ form_start(form) }}
+    <h1 class="h3 mb-3 font-weight-normal">Faites nous part de votre question</h1>
     {{ form_widget(form) }}
-    <button>Envoyer</button>
+    <button class="btn btn-success">Envoyer</button>
     {{ form_end(form) }}
 {% endblock %}
