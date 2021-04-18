@@ -9,8 +9,14 @@
         </div>
     {% endfor %}
     {{ form_start(form) }}
-    <h1 class="h3 mb-3 font-weight-normal">Faites nous part de votre question</h1>
+    <h1 class="h3 mb-5 font-weight-normal">Faites nous part de votre question</h1>
     {{ form_widget(form) }}
-    <button class="btn btn-success">Envoyer</button>
+    <button class="btn btn-success send-request">Envoyer</button>
+    <img src="https://www.lenovo.com/_ui/desktop/common/images/lsb/lsb-loading.gif" alt="loader" class="loader">
     {{ form_end(form) }}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('loader') }}
 {% endblock %}

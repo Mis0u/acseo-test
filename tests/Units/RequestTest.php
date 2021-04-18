@@ -5,6 +5,8 @@ namespace App\Tests\Units;
 
 use App\Entity\ContactRequest;
 use PHPUnit\Framework\TestCase;
+use Symfony\Component\String\Slugger\AsciiSlugger;
+
 
 class RequestTest extends TestCase
 {
@@ -18,6 +20,8 @@ class RequestTest extends TestCase
     public function it_return_true(): void
     {
         $request = new ContactRequest();
+        $slugger = new AsciiSlugger();
+
 
         $request->setName(self::NAME)
                 ->setEmail(self::EMAIL)

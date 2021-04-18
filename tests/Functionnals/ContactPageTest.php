@@ -48,7 +48,7 @@ class ContactPageTest extends WebTestCase
         ]);
 
         $this->assertSelectorTextContains(
-            'ul li',
+            'span.form-error-message',
             $error,
             'L\'erreur ne s\'affiche pas pour le champ '.$field
         );

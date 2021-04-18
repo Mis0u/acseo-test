@@ -27,7 +27,7 @@ class BackOfficePageTest extends WebTestCase
 
         $client->followRedirect();
 
-        $this->assertSelectorTextContains('h1','Page de connexion','Le h1 ne contient pas le texte souhaité');
+        $this->assertSelectorTextContains('h1','Connexion','Le h1 ne contient pas le texte souhaité');
     }
 
     /**

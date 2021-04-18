@@ -18,10 +18,13 @@ class UserTest extends TestCase
         $user = new User();
 
         $user->setEmail(self::EMAIL)
-             ->setPassword('pass_1234');
+             ->setPassword('pass_1234')
+             ->setRoles([])
+        ;
 
         $this->assertTrue($user->getEmail() === self::EMAIL, 'GetEmail est différent du Setter');
         $this->assertTrue($user->getPassword() === 'pass_1234', 'GetPassword est différent du Setter');
+        $this->assertTrue($user->getRoles() === ['ROLE_USER'], 'GetRoles est différent du Setter');
     }
 
     /**
@@ -32,10 +35,14 @@ class UserTest extends TestCase
         $user = new User();
 
         $user->setEmail(self::EMAIL)
-             ->setPassword('pass_1234');
+             ->setPassword('pass_1234')
+             ->setRoles(['ROLE_USER'])
+        ;
 
         $this->assertFalse($user->getEmail() !== self::EMAIL, 'GetEmail est identique au Setter');
         $this->assertFalse($user->getPassword() !== 'pass_1234', 'GetPassword est identique au Setter');
+        $this->assertFalse($user->getRoles() !== ['ROLE_USER'], 'GetRoles est identique au Setter');
+
     }
 
     /**
@@ -46,10 +53,14 @@ class UserTest extends TestCase
         $user = new User();
 
         $user->setEmail('')
-             ->setPassword('');
+             ->setPassword('')
+        ;
+        //dd($user->getRoles());
 
         $this->assertEmpty($user->getEmail(), 'GetEmail contient une valeur');
         $this->assertEmpty($user->getPassword(), 'GetPassword contient une valeur');
+
+
     }
 
     /**

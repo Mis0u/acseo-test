@@ -2,6 +2,7 @@
 
 namespace App\Tests\Functionnals;
 
+use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -24,10 +25,30 @@ class LoginPageTest extends WebTestCase
         $this->assertResponseStatusCodeSame(Response::HTTP_OK, 'La page n\'est pas accessible');
         $this->assertSelectorTextContains(
             'h1',
-            'Page de connexion',
+            'Connexion',
             'Le sélecteur h1 ne contient pas le texte attendu'
         );
         $this->assertSelectorExists('form', 'Le formulaire est absent');
+    }
+
+    /**
+     * @test
+     */
+    public function it_is_redirect(): void
+    {
+        $client = static::createClient();
+
+        $userRepository = static::$container->get(UserRepository::class);
+        $testUser = $userRepository->findOneByEmail(self::GOOD_EMAIL);
+
+        $client->loginUser($testUser);
+
+        $client->request(Request::METHOD_GET, '/connexion');
+
+        $this->assertResponseRedirects(
+            '/admin',
+            Response::HTTP_FOUND,
+            'La page de connexion a été affiché');
     }
 
     /**

@@ -19,6 +19,7 @@ class AdminController extends AbstractController
         $allEmail = $repo->findByEmail();
         $column = array_column($allEmail, 'email');
         $numberOfEmails = array_count_values($column);
+
         return $this->render('admin/index.html.twig', [
             'requests' => $numberOfEmails,
         ]);
