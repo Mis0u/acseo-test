@@ -19,7 +19,7 @@
                 <tr>
                     <td>{{ key }}</td>
                     <td>{{ value }}</td>
-                    <td><a href="#">Voir</a></td>
+                    <td><a href="{{ path('app_admin_contact', {'slug': key|slug}) }}">Voir</a></td>
                 </tr>
             {% endfor %}
             </tbody>

@@ -31,7 +31,7 @@ class ContactController extends AbstractController
             $manager->persist($contactRequest);
             $manager->flush();
             $this->addFlash('success', 'Votre question a bien été envoyée');
-            $projectDir = $kernel->getProjectDir();
+            //$projectDir = $kernel->getProjectDir();
             $filesystem = new Filesystem();
             $jsonContent = $serializer->serialize($contactRequest, 'json', ['groups' => 'list_contact']);
 

@@ -7,10 +7,12 @@ use App\Repository\ContactRequestRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\String\Slugger\AsciiSlugger;
 
 
 /**
  * @ORM\Entity(repositoryClass=ContactRequestRepository::class)
+ * @ORM\HasLifecycleCallbacks()
  */
 class ContactRequest
 {
@@ -57,6 +59,11 @@ class ContactRequest
      * @ORM\Column(type="boolean")
      */
     private bool $isRequestFinished = false;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $slug;
 
     public function getId(): ?int
     {
@@ -109,5 +116,26 @@ class ContactRequest
         $this->isRequestFinished = $isRequestFinished;
 
         return $this;
+    }
+
+    public function getSlug(): ?string
+    {
+        return $this->slug;
+    }
+
+    public function setSlug(string $slug): self
+    {
+        $this->slug = $slug;
+
+        return $this;
+    }
+
+    /**
+     * @ORM\PrePersist
+     */
+    public function setSlugValue()
+    {
+        $slugger = new AsciiSlugger();
+        $this->slug = $slugger->slug($this->getEmail());
     }
 }

@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello AdminController!{% endblock %}
+
+{% block body %}
+    <h1>{{ email_contact }}</h1>
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">Nom</th>
+            <th scope="col">Demande</th>
+            <th scope="col">Demande traité</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for request in requests %}
+            <tr>
+                <td>{{ request.name }}</td>
+                <td>{{ request.content }}</td>
+                <td>
+                    <a href="{{ path('app_admin_request', {'id': request.id}) }}">
+                        {% if request.isRequestFinished %}
+                            Retraiter cette demande
+                            {% else %}
+                                Indiquer que cette demande est traité
+                        {% endif %}
+                    </a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_admin') }}">Retour</a>
+{% endblock %}

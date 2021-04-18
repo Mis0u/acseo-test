@@ -23,7 +23,7 @@ class ContactRequestRepository extends ServiceEntityRepository
     public function findByEmail()
     {
         return $this->createQueryBuilder('r')
-            ->select('r.email')
+            ->select('r.email', 'r.slug')
             ->getQuery()
             ->getResult()
         ;
