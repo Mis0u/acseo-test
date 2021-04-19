@@ -23,9 +23,9 @@ yarn dev
 
 ```
 
-Lancer votre serveur est aller à l'url "/contact" pour faire une demande et pour la connexion, rendez-vous sur l'url '/connexion'
-id => admin@example.com
-password => pass_1234
+Lancer votre serveur est aller à l'url "/contact" pour faire une demande et pour la connexion rendez-vous sur l'url '/connexion'  
+id => admin@example.com  
+password => pass_1234  
 
-*Version utilisée de SYmfony => 5.2*
+*Version utilisée de SYmfony => 5.2*  
 *Version utilisée de PHP =>7.4.5*
