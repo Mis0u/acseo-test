@@ -18,6 +18,10 @@ class JsonFile
         $uuid = UuidV4::v4();
         $projetDir = $kernel->getProjectDir();
 
+        if (!$filesystem->exists("$projetDir/src/Json")){
+            $filesystem->mkdir("$projetDir/src/Json");
+        }
+
         $name = $contactRequest->getName().'-'.$uuid;
         $jsonContent = $serializer->serialize($contactRequest, 'json', ['groups' => 'list_contact']);
         $filesystem->dumpFile("$projetDir/src/Json/$name.json", $jsonContent);
